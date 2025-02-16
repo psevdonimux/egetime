@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>До егэ осталось</title>
+    <style>
+        html{
+         background-color: #323338;
+         color: #FFFFFF;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .timer {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .unit {
+            display: inline-block;
+            //margin: 5px;
+            //width: 120%;
+        }
+        .timer-container {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<h1>Е<span style="color: blue;">Г</span><span style="color: red;">Э</span></h1>
+
+    <div class="timer-container">
+        <h2>До химии, истории, литературы</h2>
+        <div class="timer" id="time"></div>
+    </div>
+    <div class="timer-container">
+        <h2>До математики</h2>
+        <div class="timer" id="timer"></div>
+    </div>
+    <div class="timer-container">
+        <h2>До русского</h2>
+        <div class="timer" id="timer1"></div>
+    </div>
+    <div class="timer-container">
+        <h2>До обществознания, физики</h2>
+        <div class="timer" id="timer2"></div>
+    </div>
+    <div class="timer-container">
+        <h2>До биологии, географии</h2>
+        <div class="timer" id="time2"></div>
+    </div>
+    <div class="timer-container">
+        <h2>До информатики</h2>
+        <div class="timer" id="timer3"></div>
+    </div>
+    <script>
+        function updateTimer(targetDate, elementId) {
+    const currentDate = new Date();
+    const difference = targetDate - currentDate;
+    if (difference <= 0) {
+        document.getElementById(elementId).innerHTML = "Время вышло!";
+        return;
+    }
+    const months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30));
+    const days = Math.floor((difference % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    function getMonthEnding(months) {
+        if (months === 1) return 'месяц';
+        if (months > 1 && months < 5) return 'месяца';
+        return 'месяцев';
+    }
+    function getDayEnding(days) {
+    if (days % 10 === 1 && days !== 11) return 'день';
+    if (days % 10 > 1 && days % 10 < 5 && !(days >= 11 && days <= 14)) return 'дня';
+    return 'дней';
+}
+    function getHourEnding(hours) {
+    if (hours % 10 === 1 && hours !== 11) return 'час';
+    if (hours % 10 > 1 && hours % 10 < 5 && !(hours >= 11 && hours <= 14)) return 'часа';
+    return 'часов';
+    }
+    function getMinuteEnding(minutes) {
+    if (minutes % 10 === 1 && minutes !== 11) return 'минута';
+    if (minutes % 10 > 1 && minutes % 10 < 5 && !(minutes >= 11 && minutes <= 14)) return 'минуты';
+    return 'минут';
+}
+function getSecondEnding(seconds) {
+    if (seconds % 10 === 1 && seconds !== 11) return 'секунда';
+    if (seconds % 10 > 1 && seconds % 10 < 5 && !(seconds >= 11 && seconds <= 14)) return 'секунды';
+    return 'секунд';
+}
+    document.getElementById(elementId).innerHTML =
+        `<span class="unit">${months} ${getMonthEnding(months)} ${days} ${getDayEnding(days)} ${hours} ${getHourEnding(hours)} ${minutes} ${getMinuteEnding(minutes)} ${seconds} ${getSecondEnding(seconds)}</span>`;
+}
+        const dat = new Date("2025-05-23T00:00:00");
+        const date = new Date("2025-05-27T00:00:00");
+        const date1 = new Date("2025-05-30T00:00:00");
+        const date2 = new Date("2025-06-02T00:00:00");
+        const dat2 = new Date("2025-06-05T00:00:00");
+        const date3 = new Date("2025-06-10T00:00:00");
+        setInterval(() => {
+        updateTimer(dat, 'time'); 
+        updateTimer(date, 'timer'); 
+        updateTimer(date1, 'timer1'); 
+        updateTimer(date2, 'timer2'); 
+        updateTimer(dat2, 'time2'); 
+        updateTimer(date3, 'timer3');
+       }, 1000);
+    </script>
+</body>
+</html>
